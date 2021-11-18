@@ -4,8 +4,4 @@
 
 [JVM解析](https://apiinvoker.github.io/JVM/JVM.html)
 
-For more details see [GitHub](https://github.com/APIInvoker).
-
-### Contact
-
-apiinvoker@gmail.com
+### Send E-Mail to apiinvoker@gmail.com to contact me.
