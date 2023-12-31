@@ -1,6 +1,6 @@
 ## Welcome to APIInvoker's Homepage
 
-[Docker安装Redis](https://apiinvoker.github.io/article/Docker安装MySQL8.2.0/Docker安装MySQL8.2.0.html)
+[Docker安装MySQL8.2.0](https://apiinvoker.github.io/article/Docker安装MySQL8.2.0/Docker安装MySQL8.2.0.html)
 
 [Docker安装Redis](https://apiinvoker.github.io/article/Docker安装Redis/Docker安装Redis.html)
 
