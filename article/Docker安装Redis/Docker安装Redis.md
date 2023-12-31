@@ -8,10 +8,10 @@ sudo docker pull redis
 
 ```shell
 cd ~
-mkdir conf
-cd conf
 mkdir redis
 cd redis
+mkdir conf
+cd conf
 ```
 
 从Redis官网获取Redis配置文件。
