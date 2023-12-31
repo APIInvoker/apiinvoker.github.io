@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>Docker安装Redis</title>
+      <title>Docker安装MySQL8.2.0</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -24,34 +24,40 @@
     
       <div class="crossnote markdown-preview  ">
       
-<h1 id="docker安装redis">Docker安装Redis </h1>
-<p><strong>2023-12-28</strong></p>
+<h1 id="docker安装mysql820">Docker安装MySQL8.2.0 </h1>
+<p><strong>2024-01-01</strong></p>
 <hr>
-<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">sudo</span> <span class="token function">docker</span> pull redis
-</code></pre><pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token builtin class-name">cd</span> ~
-<span class="token function">mkdir</span> conf
-<span class="token builtin class-name">cd</span> conf
-<span class="token function">mkdir</span> redis
-<span class="token builtin class-name">cd</span> redis
-</code></pre><p>从Redis官网获取Redis配置文件。<br>
-获取后为了开启远程连接，将文件中其中的<code>bind 127.0.0.1 -::1</code>注释，<br>
-将<code>protected-mode yes</code>改成<code>protected-mode no</code></p>
-<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">wget</span> http://download.redis.io/redis-stable/redis.conf
-</code></pre><p><em>你没看错，有的参数是两个斜杠，确实是两个！</em></p>
-<ul>
-<li><code>--name 你要为这个容器起什么名称</code></li>
-<li><code>-d 后台运行容器，返回容器ID</code></li>
-<li><code>-p xxx:xxx</code> 端口映射<br>
-系统端口:容器内部端口</li>
-<li><code>--restart always</code> 自动启动容器</li>
-<li><code>-v aaa:bbb</code> 文件挂载<br>
-aaa:容器外部文件 bbb:容器内部文件</li>
-</ul>
-<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">sudo</span> <span class="token function">docker</span> run <span class="token parameter variable">--name</span> redis <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token number">6379</span>:6379 <span class="token parameter variable">--restart</span> always <span class="token parameter variable">-v</span> /home/zx/redis/conf/redis.conf:/etc/redis.conf redis redis-server /etc/redis.conf
-</code></pre><p>进入容器</p>
-<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">sudo</span> <span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> redis /bin/bash
-</code></pre><p>测试Redis连接功能</p>
-<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code>redis-cli
+<p>查一下MySQL镜像<br>
+<img src="image.png" alt="Alt text"></p>
+<p>准备一些文件夹做挂载</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">mkdir</span> /home/zx/mysql/conf
+<span class="token function">mkdir</span> /home/zx/mysql/data
+<span class="token function">mkdir</span> /home/zx/mysql/log
+<span class="token function">mkdir</span> /home/zx/mysql/mysql-files
+</code></pre><p>拉取镜像</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">sudo</span> <span class="token function">docker</span> pull mysql
+</code></pre><p>先随便创建一个临时容器，因为我们要拿配置文件，用于挂载。</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">sudo</span> <span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--name</span> mysql <span class="token parameter variable">-p</span> <span class="token number">3306</span>:3306 <span class="token parameter variable">-e</span> <span class="token assign-left variable">MYSQL_ROOT_PASSWORD</span><span class="token operator">=</span>adminadmin mysql
+</code></pre><p>进入临时容器</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">sudo</span> <span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> mysql /bin/bash
+</code></pre><p>找一下配置文件<code>my.cnf</code></p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token builtin class-name">cd</span> etc
+<span class="token function">ls</span>
+</code></pre><p><img src="1704043248366.png" alt="Alt text"></p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">cat</span> my.cnf
+</code></pre><p>全选复制<code>ctrl + insert</code><br>
+<img src="1704044591001.png" alt="Alt text"></p>
+<p>退出到容器外</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code>quit
+</code></pre><p>手动粘贴<code>shift + insert</code>刚找到的文件到容器外(vim怎么保存自己查一下......)</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">sudo</span> <span class="token function">vim</span> /home/zx/mysql/conf/my.cnf
+</code></pre><p>停掉并删掉这个临时容器</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">sudo</span> <span class="token function">docker</span> stop mysql
+<span class="token function">sudo</span> <span class="token function">docker</span> <span class="token function">rm</span> mysql
+</code></pre><p>创建我们真正想要的容器</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">sudo</span> <span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token number">3306</span>:3306 <span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token parameter variable">--name</span> mysql <span class="token parameter variable">--privileged</span><span class="token operator">=</span>true <span class="token parameter variable">-v</span> /home/zx/mysql/log:/var/log/mysql <span class="token parameter variable">-v</span> /home/zx/mysql/data:/var/lib/mysql <span class="token parameter variable">-v</span> /home/zx/mysql/conf/my.cnf:/etc/my.cnf <span class="token parameter variable">-e</span> <span class="token assign-left variable">MYSQL_ROOT_PASSWORD</span><span class="token operator">=</span>adminadmin mysql --lower-case-table-names<span class="token operator">=</span><span class="token number">1</span>
+</code></pre><p>查看服务状态</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell shell"><code><span class="token function">sudo</span> <span class="token function">docker</span> <span class="token function">ps</span>
 </code></pre>
       </div>
       

@@ -30,12 +30,7 @@ wget http://download.redis.io/redis-stable/redis.conf
 - ```-v aaa:bbb``` 文件挂载
 aaa:容器外部文件 bbb:容器内部文件
 ```shell
-sudo docker run --name redis -d -p 6379:6379 --restart always -v /home/zx/conf/redis/redis.conf:/etc/redis.conf redis redis-server /etc/redis.conf
-```
-
-启动容器
-```shell
-sudo docker start redis
+sudo docker run --name redis -d -p 6379:6379 --restart always -v /home/zx/redis/conf/redis.conf:/etc/redis.conf redis redis-server /etc/redis.conf
 ```
 
 进入容器
