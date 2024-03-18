@@ -54,4 +54,4 @@ MVCC实现基于undolog、版本链、readview
 
 学习于： [MVCC详解，深入浅出简单易懂](http://t.csdnimg.cn/hC8Pc)
 
-做了适合于自己阅读的整理。
+这里做了适合于自己阅读的整理。

@@ -1,7 +1,5 @@
 ## Welcome to APIInvoker's Homepage
 
-[MVCC实现原理](https://apiinvoker.github.io/article/MVCC实现原理/MVCC实现原理.md)
-
 [MVCC实现原理](https://apiinvoker.github.io/article/MVCC实现原理/MVCC实现原理.html)
 
 [Docker安装MySQL8.2.0](https://apiinvoker.github.io/article/Docker安装MySQL8.2.0/Docker安装MySQL8.2.0.html)
