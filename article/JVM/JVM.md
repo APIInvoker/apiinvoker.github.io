@@ -1,6 +1,6 @@
 ## JVM内存模型解析
 
-![JVM.png](sequence%20diag%20BuildDashboard%20%281%29.png)
+![JVM.png](JVM.png)
 
 堆：存储对象
 
