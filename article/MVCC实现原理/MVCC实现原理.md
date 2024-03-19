@@ -8,7 +8,7 @@ MVCC中提到的读都是快照读，也就是普通的select。快照读不用�
 
 除了快照读，还有当前读。当前读是给读取的数据加锁，所以读到的都是最新的。
 
-<b>将MySQL调整为InnoDB引擎且为RC和RR级别时，MSQL快照读支持MVCC。</b>
+<b>将MySQL调整为InnoDB引擎且为RC和RR级别时，MySQL快照读支持MVCC。</b>
 
 ## 2. MVCC实现原理
 MVCC实现基于undolog、版本链、readview
