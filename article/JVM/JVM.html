@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="file:///c:\Users\zx\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.11\crossnote\dependencies\katex\katex.min.css">
+      <link rel="stylesheet" href="file:///c:\Users\zx\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.13\crossnote\dependencies\katex\katex.min.css">
       
       
       
@@ -25,12 +25,10 @@
       <div class="crossnote markdown-preview  ">
       
 <h2 id="jvm内存模型解析">JVM内存模型解析 </h2>
-<p><img src="JVM.png" alt="alt text"><br>
-堆：存储对象<br>
-栈：存储基础数据类型(如：boolean,byte,char...)和对堆中对象的引用<br>
-方法区：存储常量池和每个类的结构、方法、字段等元数据信息</p>
-<p>堆和方法区是线程公有的<br>
-栈是线程私有的</p>
+<p><img src="JVM.png" alt="JVM.png"></p>
+<p>堆：存储对象</p>
+<p>栈：对堆中对象的引用</p>
+<p>方法区：存储常量池（各种字面量和符号引用）和每个类的结构、方法、字段等元数据信息。虽然物理意义上方法区在堆内存中，但逻辑上我们还是将它与堆做区分。</p>
 <h2 id="java栈模型解析">Java栈模型解析 </h2>
 <p><img src="Stack.png" alt="alt text"></p>
 <p>Java栈测试用例</p>
